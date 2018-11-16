@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SignUpSignInMobileApp</string>
+    <string name="Error">Error</string>
+    <string name="Exception">Exception</string>
+</resources>
