@@ -7,16 +7,18 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import businessLogic.Logic;
+import businessLogic.LogicFactory;
 import exceptions.BadPasswordException;
+import exceptions.DatabaseException;
 import exceptions.LoginNotExistingException;
 
 /**
@@ -24,12 +26,11 @@ import exceptions.LoginNotExistingException;
  *
  * @author Leticia e Igor
  */
-public class SignInActivity extends AppCompatActivity implements View.OnClickListener{
+public class SignInActivity extends AppCompatActivity implements View.OnClickListener,Thread.UncaughtExceptionHandler{
 
     private EditText login;
     private EditText password;
     private Button btnSignIn;
-    private ImageView photo;
     private TextView hpNotRegister;
     private CheckBox remember;
     private UserBean user;
@@ -45,18 +46,34 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+
+
         login = findViewById(R.id.eTxtLogin);
         password = findViewById(R.id.eTxtPassword);
         btnSignIn = findViewById(R.id.btnSignIn);
         hpNotRegister = findViewById(R.id.txtClickhere);
-        photo = findViewById(R.id.imageUser);
         remember = findViewById(R.id.chkRememberLogin);
         btnSignIn.setOnClickListener(this);
         hpNotRegister.setOnClickListener(this);
 
         LoadLogin();
-
+        logicController = LogicFactory.createLogicImplementation("USER_CLIENT_TYPE");
     }
+
+    private static final int INTERVALO = 2000; //2 segundos para salir
+    private long tiempoPrimerClick;
+
+    @Override
+    public void onBackPressed(){
+        if (tiempoPrimerClick + INTERVALO > System.currentTimeMillis()){
+            super.onBackPressed();
+            return;
+        }else {
+            Toast.makeText(this, "\n" + "Press again to exit", Toast.LENGTH_SHORT).show();
+        }
+        tiempoPrimerClick = System.currentTimeMillis();
+    }
+
     //Metodo para coger lo que tengas escrito y lo ponga en el campo de login.
     /**
      * Method to load the login saved in a file and put it in the field Login .
@@ -83,6 +100,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
+
+
     /**
      * Method to go to the UserViewActivity when you check the data entered when you press the SignIn button.
      * also when we click in the hpNotRegister, SignUpActivity opens.
@@ -90,7 +109,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
      */
     @Override
     public void onClick(View v) {
-        Intent intent = null;
+
         if (btnSignIn.isPressed()) {
 
 
@@ -114,59 +133,70 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 builder.show();
             }
 
-            try{
-                UserBean user = new UserBean(login.getText().toString(),password.getText().toString());
+            validateUser();
 
-                logicController.signIn(user);
-                ConnectionThread thread = new ConnectionThread(user, 1, logicController);
-                thread.start();
+            if(remember.isChecked()){
                 SaveLogin();
-                intent = new Intent(SignInActivity.this, UserViewActivity.class);
-                startActivity(intent);
-
-            }catch(LoginNotExistingException e){
-                login.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorError));
-                Toast.makeText(this, "Login is wrong", Toast.LENGTH_LONG).show();
-
-            }catch(BadPasswordException e){
-                password.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorError));
-                Toast.makeText(this, " Password is wrong", Toast.LENGTH_LONG).show();
-
-            } catch (Exception ex) {
-                Toast.makeText(this,"Error connecting with the dataBase", Toast.LENGTH_LONG).show();
-
             }
-
-            /*}else if(login.getText().toString().equals("a")) {
-                if (password.getText().toString().equals("a")) {
-
-
-
-
-
-                    SaveLogin();
-                    intent = new Intent(SignInActivity.this, UserViewActivity.class);
-                    startActivity(intent);
-
-
-                }else{
-                    password.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorError));
-                    Toast.makeText(this, " Password is wrong", Toast.LENGTH_LONG).show();
-                }
-
-            } else{
-                login.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorError));
-                Toast.makeText(this, "Login is wrong", Toast.LENGTH_LONG).show();
-
-            }*/
-
+            Intent intent = new Intent(SignInActivity.this, UserViewActivity.class);
+            startActivity(intent);
 
         }
 
         if (hpNotRegister.isPressed()) {
-            intent = new Intent(SignInActivity.this, SignUpActivity.class);
+            Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
             startActivity(intent);
+
         }
 
     }
+
+    private UserBean validateUser(){
+        UserBean returnUser = null;
+        try{
+            UserBean u = new UserBean(login.getText().toString(),password.getText().toString());
+
+            logicController.signIn(user);
+            ConnectionThread thread = new ConnectionThread(u,1, logicController);
+            thread.setUncaughtExceptionHandler(this::uncaughtException);
+            thread.start();
+            thread.join();
+            user = thread.getUser();
+
+
+
+        }catch(LoginNotExistingException e){
+            login.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorError));
+            Toast.makeText(this, "Login is wrong", Toast.LENGTH_LONG).show();
+
+        }catch(BadPasswordException e){
+            password.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorError));
+            Toast.makeText(this, " Password is wrong", Toast.LENGTH_LONG).show();
+
+        } catch (InterruptedException ex) {
+            Toast.makeText(this,"Error connecting with the dataBase", Toast.LENGTH_LONG).show();
+
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+        }
+        return returnUser;
+    }
+
+
+    /**
+     * method that catches exceptions
+     *  @param
+     * @param
+     */
+    @Override
+    public void uncaughtException(Thread t, Throwable e) {
+        if (e.getCause() instanceof LoginNotExistingException) {
+
+        } else if (e.getCause() instanceof BadPasswordException) {
+
+        } else {
+
+        }
+    }
+
 }

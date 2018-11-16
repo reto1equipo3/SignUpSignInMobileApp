@@ -253,6 +253,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         } else if(txtClickHere.isPressed()){
             Intent intent = new Intent(this,SignInActivity.class);
             startActivity(intent);
+            finish();
         } else if(hpTermsConditions.isPressed()){
             Intent browser= new Intent(Intent.ACTION_VIEW, Uri.parse("/PruebaTermsOfUse.pdf"));
             startActivity(browser);

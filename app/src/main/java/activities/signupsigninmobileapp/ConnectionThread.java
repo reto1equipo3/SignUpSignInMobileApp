@@ -12,6 +12,7 @@ public class ConnectionThread extends Thread {
 
 
     public UserBean getUser() {
+
         return user;
     }
 
