@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import model.UserBean;
+
 public class UserViewActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, UserViewFragment.OnFragmentInteractionListener{
 
@@ -28,6 +30,7 @@ public class UserViewActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
+        UserBean user = (UserBean) getIntent().getExtras().getSerializable("User");
 
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -40,6 +43,7 @@ public class UserViewActivity extends AppCompatActivity
 
         navigationView.getMenu().getItem(0).setChecked(false);
         Fragment f = new UserViewFragment();
+        ((UserViewFragment) f).setUser(user);
         getSupportFragmentManager().beginTransaction().add(R.id.content_main , f).commit();
     }
 

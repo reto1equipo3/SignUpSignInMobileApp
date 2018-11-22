@@ -29,6 +29,7 @@ import businessLogic.Logic;
 import businessLogic.LogicFactory;
 import exceptions.EmailNotUniqueException;
 import exceptions.LoginExistingException;
+import model.UserBean;
 
 /**
  *
@@ -59,6 +60,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        txtFullName = findViewById(R.id.txtFullName);
+        txtLogin = findViewById(R.id.txtLogin);
+        txtEmail = findViewById(R.id.txtEmail);
+        pwdPassword = findViewById(R.id.pwdPassword);
+        pwdConfirmPassword = findViewById(R.id.pwdConfirmPassword);
+        chkAgree = findViewById(R.id.chkAgree);
         imgUserPhoto = findViewById(R.id.imgUserPhoto);
         btnSignUp = findViewById(R.id.btnSignUp);
         hpTermsConditions = findViewById(R.id.hpTermsConditions);
@@ -267,6 +274,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         // Boolean to check if all fields are filled correctly
         boolean validFields = true;
 
+        /*
         // Validate terms of use
         if (!chkAgree.isSelected()) {
             LOGGER.log(Level.SEVERE, "Sign Up controller::handleSignUpAction: Terms of use not accepted.");
@@ -314,6 +322,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
             validFields = false;
         }
+        */
         // If all fields are filled correctly sign up the user
         if (validFields) {
             UserBean user = new UserBean();
@@ -323,7 +332,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             user.setPassword(pwdPassword.getText().toString());
             //user.setUserPhoto(my_blob);
 
-            Logic logic = new LogicFactory().createLogicImplementation(LogicFactory.USER_CLIENT_TYPE);
+            Logic logic = new LogicFactory().createImplementation();
 
             try {
                 logic.signUp(user);

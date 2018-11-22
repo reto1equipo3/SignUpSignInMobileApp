@@ -1,7 +1,6 @@
 package businessLogic;
 
 import activities.signupsigninmobileapp.SocketClient;
-import activities.signupsigninmobileapp.UserBean;
 import exceptions.BadPasswordException;
 import exceptions.EmailNotUniqueException;
 import exceptions.LoginExistingException;
@@ -9,6 +8,7 @@ import exceptions.LoginNotExistingException;
 import exceptions.DatabaseException;
 import message.Message;
 import message.MessageType;
+import model.UserBean;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

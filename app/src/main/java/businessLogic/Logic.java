@@ -5,15 +5,12 @@
  */
 package businessLogic;
 
-import activities.signupsigninmobileapp.UserBean;
 import exceptions.BadPasswordException;
 import exceptions.DatabaseException;
 import exceptions.EmailNotUniqueException;
 import exceptions.LoginExistingException;
 import exceptions.LoginNotExistingException;
-
-
-
+import model.UserBean;
 
 
 /**
@@ -42,7 +39,7 @@ public interface Logic {
    
     /**
      * This method ends the user's session
-     * @param user. The UserBean object to be ended
+     * @param user The UserBean object to be ended
      * @throws Exception If there is any error while processing.
      */
     public void logOut(UserBean user) throws DatabaseException;
