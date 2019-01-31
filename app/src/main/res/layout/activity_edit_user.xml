@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:screenOrientation="portrait"
+    android:background="@drawable/side_nav_bar"
+    tools:context=".EditUserActivity">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/edit_profile"
+        android:textAlignment="textStart"
+        android:textSize="65dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="443dp"
+        android:layout_height="478dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/btnSaveEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <EditText
+            android:id="@+id/eTxtLoginEdit"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="36dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/txtfield_redondeado"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:text="Login"
+            android:textSize="30sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtFullName"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="13dp"
+                android:text="@string/full_name"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/eTxtNameEdit"
+                android:layout_width="200dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/txtfield_redondeado"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtEmail"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="13dp"
+                android:text="@string/email"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/eTxtEmailEdit"
+                android:layout_width="200dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/txtfield_redondeado"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtPhoneNumber"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="13dp"
+                android:text="@string/phone_number"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/eTxtPhoneNumberEdit"
+                android:layout_width="200dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/txtfield_redondeado"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textSize="15dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtPostalCode"
+            android:layout_width="211dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="12dp"
+            android:text="@string/postal_code"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/txtTown"
+            app:layout_constraintEnd_toStartOf="@+id/eTxtPostalCodeEdit"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtPhoneNumber" />
+
+        <TextView
+            android:id="@+id/txtTown"
+            android:layout_width="181dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="12dp"
+            android:text="@string/town"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/txtAddress"
+            app:layout_constraintEnd_toStartOf="@+id/eTxtTownEdit"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtPostalCode" />
+
+        <TextView
+            android:id="@+id/txtAddress"
+            android:layout_width="216dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="40dp"
+            android:text="@string/address"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnSaveEdit"
+            app:layout_constraintEnd_toStartOf="@+id/eTxtAddressEdit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTown" />
+
+        <EditText
+            android:id="@+id/eTxtPostalCodeEdit"
+            android:layout_width="0dp"
+            android:layout_height="27dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="1dp"
+            android:background="@drawable/txtfield_redondeado"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/eTxtTownEdit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtPostalCode"
+            app:layout_constraintTop_toBottomOf="@+id/eTxtPhoneNumberEdit" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSaveEdit"
+        android:layout_width="152dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/boton_redondeado"
+        android:text="@string/save"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+</android.support.constraint.ConstraintLayout>

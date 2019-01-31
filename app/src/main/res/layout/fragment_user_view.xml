@@ -4,98 +4,230 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:screenOrientation="portrait"
     tools:context=".UserViewFragment"
     android:background="@drawable/side_nav_bar">
 
-    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/eTxtAddressEdit"
+        android:layout_width="190dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="103dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Address"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtAddress"
+        app:layout_constraintTop_toBottomOf="@+id/eTxtTownEdit" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="55dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="User Data"
-        android:textAllCaps="false"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="30sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        android:id="@+id/eTxtTownEdit"
+        android:layout_width="0dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Town"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/eTxtAddressEdit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/txtTown"
+        app:layout_constraintTop_toBottomOf="@+id/eTxtPostalCodeEdit" />
+
+    <TextView
+        android:id="@+id/txtPhoneNumber"
+        android:layout_width="147dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="28dp"
+        android:text="@string/phone_number"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtPostalCode"
+        app:layout_constraintEnd_toStartOf="@+id/eTxtPhoneNumberEdit"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+
+    <TextView
+        android:id="@+id/eTxtPhoneNumberEdit"
+        android:layout_width="0dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Phone number"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/eTxtPostalCodeEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtPhoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/eTxtEmailEdit" />
+
+    <TextView
+        android:id="@+id/txtEmail"
+        android:layout_width="147dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="13dp"
+        android:text="@string/email"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtPhoneNumber"
+        app:layout_constraintEnd_toStartOf="@+id/eTxtEmailEdit"
+        app:layout_constraintHorizontal_bias="0.858"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFullName" />
+
+    <TextView
+        android:id="@+id/eTxtEmailEdit"
+        android:layout_width="0dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="15dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Email"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/eTxtPhoneNumberEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtEmail"
+        app:layout_constraintTop_toBottomOf="@+id/eTxtNameEdit" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Welcome"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/welcome"
         android:textAlignment="textStart"
-        android:textSize="36sp"
+        android:textSize="65dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintBottom_toTopOf="@+id/eTxtLoginEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.176" />
+        app:layout_constraintVertical_bias="0.00999999"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="296dp"
-        android:layout_height="151dp"
-        android:layout_marginBottom="160dp"
+    <TextView
+        android:id="@+id/txtFullName"
+        android:layout_width="147dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="13dp"
+        android:text="@string/full_name"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtEmail"
+        app:layout_constraintEnd_toStartOf="@+id/eTxtNameEdit"
+        app:layout_constraintHorizontal_bias="0.433"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eTxtLoginEdit" />
+
+    <TextView
+        android:id="@+id/eTxtNameEdit"
+        android:layout_width="0dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="15dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/eTxtEmailEdit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toEndOf="@+id/txtFullName"
+        app:layout_constraintTop_toBottomOf="@+id/eTxtLoginEdit" />
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Email:"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="10dp"
-            tools:layout_editor_absoluteX="48dp"
-            tools:layout_editor_absoluteY="392dp" />
+    <TextView
+        android:id="@+id/eTxtLoginEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="36dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:text="Login"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/eTxtNameEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Login: "
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="10dp"
-            tools:layout_editor_absoluteX="48dp"
-            tools:layout_editor_absoluteY="437dp" />
+    <TextView
+        android:id="@+id/txtPostalCode"
+        android:layout_width="126dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/postal_code"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtTown"
+        app:layout_constraintEnd_toStartOf="@+id/eTxtPostalCodeEdit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPhoneNumber" />
 
-        <TextView
-            android:id="@+id/lblEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="11dp"
-            android:text="TextView" />
+    <TextView
+        android:id="@+id/txtTown"
+        android:layout_width="123dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/town"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtAddress"
+        app:layout_constraintEnd_toStartOf="@+id/eTxtTownEdit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPostalCode" />
 
-        <TextView
-            android:id="@+id/lblLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="50dp"
-            android:text="TextView" />
-    </android.support.v7.widget.CardView>
+    <TextView
+        android:id="@+id/txtAddress"
+        android:layout_width="126dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="105dp"
+        android:text="@string/address"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/eTxtAddressEdit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTown" />
+
+    <TextView
+        android:id="@+id/eTxtPostalCodeEdit"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Postal code"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/eTxtTownEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtPostalCode"
+        app:layout_constraintTop_toBottomOf="@+id/eTxtPhoneNumberEdit" />
+
 
 </android.support.constraint.ConstraintLayout>

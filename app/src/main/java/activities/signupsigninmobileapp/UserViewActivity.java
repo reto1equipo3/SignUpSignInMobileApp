@@ -5,73 +5,50 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-import model.UserBean;
+public class UserViewActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        PedidosFragment.OnFragmentInteractionListener,UserViewFragment.OnFragmentInteractionListener{
 
-public class UserViewActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, UserViewFragment.OnFragmentInteractionListener{
-
-
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_view);
+
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        UserBean user = (UserBean) getIntent().getExtras().getSerializable("User");
-
-        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        DrawerLayout drawer =  findViewById(R.id.userView_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         navigationView.getMenu().getItem(0).setChecked(false);
-        Fragment f = new UserViewFragment();
-        ((UserViewFragment) f).setUser(user);
+        Fragment f = new PedidosFragment();
+        //((PedidosFragment) f).setUser(user);
         getSupportFragmentManager().beginTransaction().add(R.id.content_main , f).commit();
-    }
 
+       /* if(savedInstanceState == null) {
+            setFragment(0);
+            navigationView.getMenu().getItem(0).setChecked(true);
+        }*/
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-            builder.setTitle("Warning").setMessage("Are you sure that you want to exit?").setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(UserViewActivity.this, SignInActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    closeOptionsMenu();
-                }
-            });
-            builder.show();
-            //super.onBackPressed();
-        }
     }
 
 
@@ -97,38 +74,53 @@ public class UserViewActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+   /* public void aceptar(){
+        Intent intent = new Intent(UserViewActivity.this, SignInActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void cancelar(){
+        closeOptionsMenu();
+    }*/
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-
         Fragment fragment = null;
+
         boolean fragmentSelect = false;
 
         switch (item.getItemId()) {
             case R.id.logOutOption:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-                builder.setTitle("Warning").setMessage("Are you sure that you want to exit?").setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                builder.setTitle("Importante");
+                builder.setMessage("¿ Are you sure that you want to exit?");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface builder, int id) {
                         Intent intent = new Intent(UserViewActivity.this, SignInActivity.class);
                         startActivity(intent);
                         finish();
                     }
-                }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                });
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface builder, int id) {
                         closeOptionsMenu();
                     }
                 });
                 builder.show();
                 break;
 
-            case R.id.userDataOption:
+            case R.id.pedidosRealizados:
+                //setFragment(0);
+                fragment = new PedidosFragment();
+                fragmentSelect = true;
+                break;
+
+            case R.id.datosUsuario:
+                //setFragment(1);
                 fragment = new UserViewFragment();
                 fragmentSelect = true;
-
                 break;
 
             case R.id.nav_share:
@@ -142,7 +134,8 @@ public class UserViewActivity extends AppCompatActivity
         if(fragmentSelect==true){
             getSupportFragmentManager().beginTransaction().replace(R.id.content_main,fragment ).commit();
         }
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
+        DrawerLayout drawer = findViewById(R.id.userView_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -152,5 +145,31 @@ public class UserViewActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer =  findViewById(R.id.userView_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setTitle("Warning").setMessage("Are you sure that you want to exit?").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(UserViewActivity.this, SignInActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    closeOptionsMenu();
+                }
+            });
+            builder.show();
+            //super.onBackPressed();
+        }
     }
 }

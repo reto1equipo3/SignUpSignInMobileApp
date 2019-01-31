@@ -6,13 +6,12 @@ import exceptions.EmailNotUniqueException;
 import exceptions.LoginExistingException;
 import exceptions.LoginNotExistingException;
 import exceptions.DatabaseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import message.Message;
 import message.MessageType;
 import model.UserBean;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+;
 
 /**
  * This class implements {@link Logic} business logic interface.
@@ -66,7 +65,7 @@ public class LogicImplementation implements Logic {
 			case E_ERROR:
 				LOGGER.log(Level.SEVERE,
 					"LogicImplementation::signIn: Exception something went wrong.");
-				throw new DatabaseException("Error." + message.getMessage());
+				throw new DatabaseException(message.getMessage().toString());
 		}
 
 		return user;

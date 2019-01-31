@@ -13,6 +13,9 @@ import exceptions.LoginNotExistingException;
 import model.UserBean;
 
 
+
+
+
 /**
  * Logic Interface encapsulating methods for users management. 
  * @author Igor
@@ -21,9 +24,10 @@ public interface Logic {
     /**
      * This method adds a new created UserBean.
      * @param user The UserBean object to be added.
+	 * @return 
      * @throws LoginNotExistingException If login does not exist.
      * @throws BadPasswordException If password is wrong.
-     * @throws Exception If something else goes wrong.
+	 * @throws DatabaseException
      */
     public UserBean signIn(UserBean user) throws LoginNotExistingException, BadPasswordException, DatabaseException;
     
@@ -32,7 +36,7 @@ public interface Logic {
      * @param user .The UserBean object to be initialized
      * @throws LoginExistingException If login already exists.
      * @throws EmailNotUniqueException If email is already used.
-     * @throws Exception If something else goes wrong
+	 * @throws DatabaseException
      */
     public void signUp(UserBean user) throws LoginExistingException, EmailNotUniqueException, DatabaseException;
     
@@ -40,7 +44,7 @@ public interface Logic {
     /**
      * This method ends the user's session
      * @param user The UserBean object to be ended
-     * @throws Exception If there is any error while processing.
+	 * @throws DatabaseException
      */
     public void logOut(UserBean user) throws DatabaseException;
 }

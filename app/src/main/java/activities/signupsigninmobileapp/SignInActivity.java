@@ -113,13 +113,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             LOGGER.info("SignInActivity::onClick: Sign in button pressed.");
             try {
                 // Set the user to sign in
-                UserBean user = new UserBean();
+               /* UserBean user = new UserBean();
                 user.setLogin(login.getText().toString());
                 user.setPassword(password.getText().toString());
 
                 // Get the logic
                 LogicFactory logicFactory = new LogicFactory();
-                logic = logicFactory.createImplementation();
+                logic = logicFactory.createLogicImplementation();
 
                 // Create a connection thread
                 ConnectionThread connectionThread = new ConnectionThread();
@@ -135,12 +135,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 connectionThread.join();
 
                 // Get the sign in user
-                user = connectionThread.getUser();
+                user = connectionThread.getUser();*/
 
                 Intent intentUserView = new Intent(SignInActivity.this, UserViewActivity.class);
-                intentUserView.putExtra("User", user);
+               // intentUserView.putExtra("User", user);
                 startActivity(intentUserView);
-            } catch (InterruptedException ex) {
+            } catch (/*Interrupted*/Exception ex) {
                 LOGGER.log(Level.SEVERE, "SignInActivity::onClick: {0}", ex.getCause());
                 Toast.makeText(this, "Connections problems. Please try again.", Toast.LENGTH_LONG).show();
             }
